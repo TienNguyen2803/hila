@@ -1,11 +1,8 @@
-import AppLayout from '@/layout/AppLayout';
+
+import { Navigate } from 'react-router-dom';
 
 function App() {
-  return (
-    <AppLayout>
-      <h1>Vitejs + React + TypeScript + Rudux Thunk + Material UI Boilerplate</h1>
-    </AppLayout>
-  )
+  return <Navigate to="/" replace />;
 }
 
-export default App
+export default App;
