@@ -204,3 +204,39 @@ const Contact = () => {
 };
 
 export default Contact;
+import React from 'react';
+import { Box, Typography, Container, TextField, Button, Grid } from '@mui/material';
+
+const Contact = () => {
+  return (
+    <Container maxWidth="md" sx={{ py: 4 }}>
+      <Box sx={{ textAlign: 'center', mb: 4 }}>
+        <Typography variant="h3" component="h1" gutterBottom>
+          Contact Us
+        </Typography>
+        <Typography variant="body1" paragraph>
+          Have questions or want to book an appointment? Get in touch with us.
+        </Typography>
+      </Box>
+      
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <TextField fullWidth label="Name" variant="outlined" />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField fullWidth label="Email" variant="outlined" type="email" />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField fullWidth label="Message" variant="outlined" multiline rows={4} />
+        </Grid>
+        <Grid item xs={12}>
+          <Button variant="contained" color="primary" size="large">
+            Send Message
+          </Button>
+        </Grid>
+      </Grid>
+    </Container>
+  );
+};
+
+export default Contact;

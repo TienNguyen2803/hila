@@ -19,7 +19,7 @@ import {
 import { styled } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Outlet } from 'react-router-dom';
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -186,9 +186,9 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       </StyledAppBar>
       {isMobile && mobileDrawer}
       
-      <Main>
-        {children}
-      </Main>
+      <Box component="main" sx={{ flexGrow: 1, pt: 8, pb: 4 }}>
+        <Outlet />
+      </Box>
     </Box>
   );
 };
