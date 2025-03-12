@@ -21,3 +21,22 @@ const Home = () => {
 };
 
 export default Home;
+import React from 'react';
+import { Box, Container } from '@mui/material';
+import Banner from '../components/Home/Banner';
+import FeaturedServices from '../components/Home/FeaturedServices';
+import FeaturedProducts from '../components/Home/FeaturedProducts';
+import Testimonials from '../components/Home/Testimonials';
+
+const Home: React.FC = () => {
+  return (
+    <Box>
+      <Banner />
+      <FeaturedServices />
+      <FeaturedProducts />
+      <Testimonials />
+    </Box>
+  );
+};
+
+export default Home;

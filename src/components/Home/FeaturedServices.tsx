@@ -65,6 +65,9 @@ const ServiceCardContent = styled(CardContent)({
 const FeaturedServices = () => {
   const navigate = useNavigate();
 
+  const FeaturedServices = () => {
+  const navigate = useNavigate();
+  
   const handleServiceClick = (id: string) => {
     navigate(`/services/${id}`);
   };
