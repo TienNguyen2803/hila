@@ -14,3 +14,14 @@ localPort = 3030
 localPort = 5173
 externalPort = 80
 exposeLocalhost = true
+
+[workflows]
+runButton = "Run"
+
+[[workflows.workflow]]
+name = "Run"
+author = 40417774
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm start"
