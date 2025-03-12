@@ -162,10 +162,7 @@ const ServiceCardContent = styled(CardContent)(({ theme }) => ({
   flexGrow: 1,
 }));
 
-const FeaturedServices = () => {
-  const navigate = useNavigate();
-
-  const handleServiceClick = (id: string) => {
+const handleServiceClick = (id: string) => {
     navigate(`/services/${id}`);
   };
 
