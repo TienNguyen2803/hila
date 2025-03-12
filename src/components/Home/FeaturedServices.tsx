@@ -117,13 +117,6 @@ const FeaturedServices = () => {
 };
 
 export default FeaturedServices;
-import React from 'react';
-import { Box, Typography, Container, Grid, Card, CardMedia, CardContent, Button } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { Service } from '../../types';
-import { useNavigate } from 'react-router-dom';
-
-// Demo data - would come from your CMS in a real application
 const services: Service[] = [
   {
     id: '1',
