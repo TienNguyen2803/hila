@@ -6,7 +6,7 @@ import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/s
 
 import { store } from './redux/store';
 import { theme } from './constants/theme';
-import Router from './router';
+import AppRouter from './router';
 
 import './styles/app.css';
 
@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <Provider store={store}>
       <CssVarsProvider theme={theme}>
         <BrowserRouter>
-          <Router />
+          <AppRouter />
         </BrowserRouter>
       </CssVarsProvider>
     </Provider>
