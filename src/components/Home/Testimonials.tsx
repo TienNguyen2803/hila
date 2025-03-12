@@ -1,5 +1,11 @@
-
-import { Box, Typography, Container, Avatar, Rating, Paper } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Container,
+  Avatar,
+  Rating,
+  Paper,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Testimonial } from '@/types';
 import { useState, useEffect } from 'react';
@@ -13,30 +19,34 @@ const sampleTestimonials: Testimonial[] = [
     id: '1',
     name: 'Sarah Johnson',
     avatar: 'https://randomuser.me/api/portraits/women/65.jpg',
-    comment: 'The aromatherapy massage was incredible! The therapist listened to my needs and customized the treatment perfectly. I left feeling completely relaxed and rejuvenated.',
-    rating: 5
+    comment:
+      'The aromatherapy massage was incredible! The therapist listened to my needs and customized the treatment perfectly. I left feeling completely relaxed and rejuvenated.',
+    rating: 5,
   },
   {
     id: '2',
     name: 'Michael Chen',
     avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-    comment: 'I've tried many spas, but this one stands out for its exceptional service and attention to detail. The facial treatment gave my skin an amazing glow!',
-    rating: 5
+    comment:
+      'I have tried many spas, but this one stands out for its exceptional service and attention to detail. The facial treatment gave my skin an amazing glow!',
+    rating: 5,
   },
   {
     id: '3',
     name: 'Emma Wilson',
     avatar: 'https://randomuser.me/api/portraits/women/22.jpg',
-    comment: 'The hot stone therapy was perfect for relieving my back pain. The atmosphere was so tranquil, and the staff were incredibly professional. Will definitely return!',
-    rating: 4
+    comment:
+      'The hot stone therapy was perfect for relieving my back pain. The atmosphere was so tranquil, and the staff were incredibly professional. Will definitely return!',
+    rating: 4,
   },
   {
     id: '4',
     name: 'David Rodriguez',
     avatar: 'https://randomuser.me/api/portraits/men/67.jpg',
-    comment: 'My wife and I enjoyed the couples massage package. It was the perfect way to celebrate our anniversary. The private suite was beautiful and the experience was unforgettable.',
-    rating: 5
-  }
+    comment:
+      'My wife and I enjoyed the couples massage package. It was the perfect way to celebrate our anniversary. The private suite was beautiful and the experience was unforgettable.',
+    rating: 5,
+  },
 ];
 
 const TestimonialsSection = styled(Box)(({ theme }) => ({
@@ -96,35 +106,37 @@ const Testimonials = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonialsCount);
+      setCurrentIndex(prevIndex => (prevIndex + 1) % testimonialsCount);
     }, 5000);
     return () => clearInterval(interval);
   }, [testimonialsCount]);
 
   const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonialsCount) % testimonialsCount);
+    setCurrentIndex(
+      prevIndex => (prevIndex - 1 + testimonialsCount) % testimonialsCount,
+    );
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonialsCount);
+    setCurrentIndex(prevIndex => (prevIndex + 1) % testimonialsCount);
   };
 
   return (
     <TestimonialsSection>
       <Container>
-        <Typography 
-          variant="h4" 
-          component="h2" 
+        <Typography
+          variant="h4"
+          component="h2"
           gutterBottom
-          sx={{ 
+          sx={{
             textAlign: 'center',
             fontWeight: 'bold',
-            mb: 5
+            mb: 5,
           }}
         >
           What Our Customers Say
         </Typography>
-        
+
         <Box sx={{ position: 'relative', my: 4, height: 350 }}>
           {sampleTestimonials.map((testimonial, index) => (
             <TestimonialCard
@@ -135,7 +147,8 @@ const Testimonials = () => {
                 left: 0,
                 right: 0,
                 opacity: index === currentIndex ? 1 : 0,
-                transform: index === currentIndex ? 'translateY(0)' : 'translateY(20px)',
+                transform:
+                  index === currentIndex ? 'translateY(0)' : 'translateY(20px)',
                 pointerEvents: index === currentIndex ? 'auto' : 'none',
               }}
             >
@@ -156,15 +169,15 @@ const Testimonials = () => {
               </Typography>
             </TestimonialCard>
           ))}
-          
-          <NavigationButton 
+
+          <NavigationButton
             sx={{ left: { xs: 10, md: -20 } }}
             onClick={handlePrevious}
           >
             <KeyboardArrowLeftIcon />
           </NavigationButton>
-          
-          <NavigationButton 
+
+          <NavigationButton
             sx={{ right: { xs: 10, md: -20 } }}
             onClick={handleNext}
           >
@@ -178,7 +191,14 @@ const Testimonials = () => {
 
 export default Testimonials;
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Container, Paper, Avatar, Rating } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Container,
+  Paper,
+  Avatar,
+  Rating,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import { Testimonial } from '../../types';
@@ -188,31 +208,35 @@ const testimonials: Testimonial[] = [
   {
     id: '1',
     name: 'Sarah Johnson',
-    comment: 'The massage therapy at this spa is absolutely wonderful. I felt completely renewed after my treatment. The staff is professional and attentive.',
+    comment:
+      'The massage therapy at this spa is absolutely wonderful. I felt completely renewed after my treatment. The staff is professional and attentive.',
     rating: 5,
-    avatar: '/images/avatar-1.jpg'
+    avatar: '/images/avatar-1.jpg',
   },
   {
     id: '2',
     name: 'Michael Chen',
-    comment: 'I\'ve tried many spas in the area, but this one stands out for its exceptional service and calming atmosphere. Will definitely be back!',
+    comment:
+      "I've tried many spas in the area, but this one stands out for its exceptional service and calming atmosphere. Will definitely be back!",
     rating: 4,
-    avatar: '/images/avatar-2.jpg'
+    avatar: '/images/avatar-2.jpg',
   },
   {
     id: '3',
     name: 'Emma Rodriguez',
-    comment: 'The facial treatment was amazing. My skin feels refreshed and I\'ve received many compliments. The esthetician was knowledgeable and friendly.',
+    comment:
+      "The facial treatment was amazing. My skin feels refreshed and I've received many compliments. The esthetician was knowledgeable and friendly.",
     rating: 5,
-    avatar: '/images/avatar-3.jpg'
+    avatar: '/images/avatar-3.jpg',
   },
   {
     id: '4',
     name: 'David Thompson',
-    comment: 'Great experience from start to finish. The aromatherapy session was exactly what I needed after a stressful week. Highly recommended!',
+    comment:
+      'Great experience from start to finish. The aromatherapy session was exactly what I needed after a stressful week. Highly recommended!',
     rating: 5,
-    avatar: '/images/avatar-4.jpg'
-  }
+    avatar: '/images/avatar-4.jpg',
+  },
 ];
 
 const SectionContainer = styled(Box)(({ theme }) => ({
@@ -244,7 +268,9 @@ const Testimonials = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+      setCurrentTestimonial(prev =>
+        prev === testimonials.length - 1 ? 0 : prev + 1,
+      );
     }, 5000);
 
     return () => clearInterval(interval);
@@ -253,25 +279,25 @@ const Testimonials = () => {
   return (
     <SectionContainer>
       <Container>
-        <Typography 
-          variant="h4" 
-          component="h2" 
+        <Typography
+          variant="h4"
+          component="h2"
           gutterBottom
-          sx={{ 
+          sx={{
             textAlign: 'center',
             fontWeight: 'bold',
-            mb: 6
+            mb: 6,
           }}
         >
           What Our Clients Say
         </Typography>
-        
+
         <Box sx={{ position: 'relative', height: '300px' }}>
           {testimonials.map((testimonial, index) => (
-            <TestimonialPaper 
-              key={testimonial.id} 
+            <TestimonialPaper
+              key={testimonial.id}
               elevation={3}
-              sx={{ 
+              sx={{
                 position: 'absolute',
                 top: 0,
                 left: 0,
@@ -281,39 +307,33 @@ const Testimonials = () => {
               }}
             >
               <QuoteIcon />
-              <Typography 
-                variant="body1" 
+              <Typography
+                variant="body1"
                 paragraph
-                sx={{ 
+                sx={{
                   fontStyle: 'italic',
                   mb: 4,
-                  pt: 2
+                  pt: 2,
                 }}
               >
                 "{testimonial.comment}"
               </Typography>
-              
+
               <Box sx={{ mt: 'auto', display: 'flex', alignItems: 'center' }}>
-                <Avatar 
-                  src={testimonial.avatar} 
+                <Avatar
+                  src={testimonial.avatar}
                   alt={testimonial.name}
                   sx={{ width: 60, height: 60, mr: 2 }}
                 />
                 <Box>
-                  <Typography variant="h6">
-                    {testimonial.name}
-                  </Typography>
-                  <Rating 
-                    value={testimonial.rating} 
-                    readOnly 
-                    size="small"
-                  />
+                  <Typography variant="h6">{testimonial.name}</Typography>
+                  <Rating value={testimonial.rating} readOnly size="small" />
                 </Box>
               </Box>
             </TestimonialPaper>
           ))}
         </Box>
-        
+
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
           {testimonials.map((_, index) => (
             <Box
@@ -323,10 +343,11 @@ const Testimonials = () => {
                 width: 12,
                 height: 12,
                 borderRadius: '50%',
-                backgroundColor: index === currentTestimonial ? 'primary.main' : 'grey.300',
+                backgroundColor:
+                  index === currentTestimonial ? 'primary.main' : 'grey.300',
                 mx: 0.5,
                 cursor: 'pointer',
-                transition: 'background-color 0.3s ease'
+                transition: 'background-color 0.3s ease',
               }}
             />
           ))}
