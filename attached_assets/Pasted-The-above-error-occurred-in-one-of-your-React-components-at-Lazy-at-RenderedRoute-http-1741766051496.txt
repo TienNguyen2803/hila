@@ -1,0 +1,27 @@
+The above error occurred in one of your React components:
+
+    at Lazy
+    at RenderedRoute (https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/react-router-dom.js?v=bbc51dd1:3653:5)
+    at Outlet (https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/react-router-dom.js?v=bbc51dd1:4024:26)
+    at main
+    at https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/chunk-OERYIN7A.js?v=bbc51dd1:4043:50
+    at Box3 (https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/chunk-MNZMZ5CV.js?v=bbc51dd1:381:19)
+    at div
+    at https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/chunk-OERYIN7A.js?v=bbc51dd1:4043:50
+    at Box3 (https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/chunk-MNZMZ5CV.js?v=bbc51dd1:381:19)
+    at AppLayout (https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/src/layout/AppLayout.tsx?t=1741765859627:85:22)
+    at RenderedRoute (https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/react-router-dom.js?v=bbc51dd1:3653:5)
+    at Routes (https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/react-router-dom.js?v=bbc51dd1:4088:5)
+    at Suspense
+    at AppRouter
+    at Router (https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/react-router-dom.js?v=bbc51dd1:4031:15)
+    at BrowserRouter (https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/react-router-dom.js?v=bbc51dd1:4774:5)
+    at RtlProvider (https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/chunk-MNZMZ5CV.js?v=bbc51dd1:1028:5)
+    at ThemeProvider (https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/chunk-MNZMZ5CV.js?v=bbc51dd1:977:5)
+    at ThemeProvider2 (https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/chunk-MNZMZ5CV.js?v=bbc51dd1:1067:5)
+    at CssVarsProvider2 (https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/chunk-MNZMZ5CV.js?v=bbc51dd1:1419:7)
+    at Provider (https://18f0a3c5-e009-4b3a-9215-3285acfbd448-00-bg3et4l0mr1d.sisko.replit.dev/node_modules/.vite/deps/react-redux.js?v=bbc51dd1:1097:3)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+Cannot convert object to primitive value
