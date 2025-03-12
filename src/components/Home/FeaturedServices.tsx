@@ -160,17 +160,6 @@ const SectionContainer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
 }));
 
-const ServiceCard = styled(Card)(({ theme }) => ({
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-  '&:hover': {
-    transform: 'translateY(-5px)',
-    boxShadow: theme.shadows[10],
-  }
-}));
-
 const ServiceCardMedia = styled(CardMedia)(({ theme }) => ({
   height: 200,
   backgroundSize: 'cover',
