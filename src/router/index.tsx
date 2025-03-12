@@ -4,10 +4,10 @@ import { Route, Routes } from 'react-router-dom';
 import Loading from '../components/Common/Loading';
 import AppLayout from '../layout/AppLayout';
 
-const Home = lazy(() => import('../pages/Home'));
-const About = lazy(() => import('../pages/About'));
+const Home = lazy(() => import('../pages/home/Home'));
+const About = lazy(() => import('../pages/about/About'));
 // const Services = lazy(() => import('../pages/Services'));
-const Contact = lazy(() => import('../pages/Contact'));
+const Contact = lazy(() => import('../pages/contact/Contact'));
 const NotFound = lazy(() => import('../pages/notFound/index'));
 
 const AppRouter: React.FC = () => {
