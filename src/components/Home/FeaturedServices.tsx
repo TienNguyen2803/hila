@@ -1,3 +1,4 @@
+
 import { Box, Typography, Grid, Card, CardMedia, CardContent, Button, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Service } from '@/types';
@@ -64,9 +65,6 @@ const ServiceCardContent = styled(CardContent)({
 
 const FeaturedServices = () => {
   const navigate = useNavigate();
-
-  const FeaturedServices = () => {
-  const navigate = useNavigate();
   
   const handleServiceClick = (id: string) => {
     navigate(`/services/${id}`);
@@ -87,7 +85,6 @@ const FeaturedServices = () => {
         >
           Our Featured Services
         </Typography>
-
         <Grid container spacing={4}>
           {sampleServices.map((service) => (
             <Grid item xs={12} sm={6} md={4} key={service.id}>
