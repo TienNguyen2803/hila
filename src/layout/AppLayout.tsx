@@ -1,20 +1,19 @@
-
-import { ReactNode, useState } from 'react';
-import { 
-  AppBar, 
-  Box, 
-  Toolbar, 
-  Typography, 
-  Button, 
-  Container, 
-  useMediaQuery, 
-  Theme, 
-  IconButton, 
-  Drawer, 
-  List, 
-  ListItem, 
+import React, { useState, ReactNode } from 'react';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Button,
+  MenuItem,
+  useMediaQuery,
+  Drawer,
+  List,
+  ListItem,
   ListItemText,
-  ListItemButton
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -22,171 +21,131 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Link as RouterLink, Outlet } from 'react-router-dom';
 
 interface AppLayoutProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
-const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  backgroundColor: 'transparent',
-  boxShadow: 'none',
-  position: 'absolute',
-  zIndex: theme.zIndex.drawer + 1,
-}));
+const pages = [
+  { title: 'Home', path: '/' },
+  { title: 'About', path: '/about' },
+  { title: 'Services', path: '/services' },
+  { title: 'Contact', path: '/contact' },
+];
 
-const LogoTypography = styled(Typography)(({ theme }) => ({
-  fontWeight: 'bold',
-  letterSpacing: 1,
-  color: 'white',
+const Logo = styled(Typography)(({ theme }) => ({
+  fontWeight: 700,
+  color: 'inherit',
   textDecoration: 'none',
 }));
 
-const NavButton = styled(Button)(({ theme }) => ({
-  color: 'white',
-  margin: theme.spacing(0, 1),
-  '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-  },
-}));
+const AppLayout: React.FC<AppLayoutProps> = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isMobile = useMediaQuery('(max-width:900px)');
 
-const BookNowButton = styled(Button)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.main,
-  color: 'white',
-  borderRadius: theme.shape.borderRadius,
-  padding: theme.spacing(1, 3),
-  marginLeft: theme.spacing(2),
-  fontWeight: 'bold',
-  '&:hover': {
-    backgroundColor: theme.palette.primary.dark,
-  },
-}));
-
-const DrawerHeader = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  padding: theme.spacing(2),
-  backgroundColor: theme.palette.primary.main,
-  color: 'white',
-}));
-
-const Main = styled(Box)(({ theme }) => ({
-  flexGrow: 1,
-  minHeight: '100vh',
-}));
-
-const AppLayout = ({ children }: AppLayoutProps) => {
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
-  const [drawerOpen, setDrawerOpen] = useState(false);
-
-  const navigationItems = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Services', path: '/services' },
-    { name: 'Products', path: '/products' },
-    { name: 'Contact', path: '/contact' },
-  ];
-
-  const toggleDrawer = () => {
-    setDrawerOpen(!drawerOpen);
+  const handleMobileMenuToggle = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
   };
 
   const mobileDrawer = (
     <Drawer
       anchor="right"
-      open={drawerOpen}
-      onClose={toggleDrawer}
+      open={mobileMenuOpen}
+      onClose={handleMobileMenuToggle}
+      ModalProps={{
+        keepMounted: true,
+      }}
+      sx={{
+        '& .MuiDrawer-paper': {
+          width: '100%',
+          maxWidth: 300,
+        },
+      }}
     >
-      <Box sx={{ width: 250 }} role="presentation">
-        <DrawerHeader>
-          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-            MENU
-          </Typography>
-          <IconButton edge="end" color="inherit" onClick={toggleDrawer}>
-            <CloseIcon />
-          </IconButton>
-        </DrawerHeader>
-        <List>
-          {navigationItems.map((item) => (
-            <ListItem key={item.name} disablePadding>
-              <ListItemButton 
-                component={RouterLink} 
-                to={item.path}
-                onClick={toggleDrawer}
-              >
-                <ListItemText primary={item.name} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-          <ListItem disablePadding>
-            <ListItemButton 
-              component={RouterLink} 
-              to="/booking"
-              onClick={toggleDrawer}
-              sx={{ 
-                bgcolor: 'primary.main', 
-                color: 'white',
-                m: 2,
-                borderRadius: 1,
-                '&:hover': {
-                  bgcolor: 'primary.dark',
-                }
-              }}
-            >
-              <ListItemText primary="Book Now" />
-            </ListItemButton>
-          </ListItem>
-        </List>
+      <Box sx={{ p: 2, display: 'flex', justifyContent: 'flex-end' }}>
+        <IconButton onClick={handleMobileMenuToggle} size="large">
+          <CloseIcon />
+        </IconButton>
       </Box>
+      <List>
+        {pages.map((page) => (
+          <ListItem
+            key={page.title}
+            component={RouterLink}
+            to={page.path}
+            onClick={handleMobileMenuToggle}
+            sx={{ color: 'inherit', textDecoration: 'none' }}
+          >
+            <ListItemText primary={page.title} />
+          </ListItem>
+        ))}
+      </List>
     </Drawer>
   );
 
+  const StyledAppBar = styled(AppBar)(({ theme }) => ({
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.text.primary,
+    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
+  }));
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <StyledAppBar>
-        <Container>
+      <StyledAppBar position="fixed">
+        <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <LogoTypography
+            <Logo
               variant="h6"
               component={RouterLink}
               to="/"
-              sx={{ flexGrow: 1 }}
+              sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
             >
-              LUXURY SPA RETREAT
-            </LogoTypography>
+              Luxury Spa
+            </Logo>
 
+            {/* Mobile menu */}
             {isMobile ? (
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="end"
-                onClick={toggleDrawer}
-              >
-                <MenuIcon />
-              </IconButton>
-            ) : (
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                {navigationItems.map((item) => (
-                  <NavButton 
-                    key={item.name}
+              <>
+                <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                  <Logo
+                    variant="h6"
                     component={RouterLink}
-                    to={item.path}
+                    to="/"
+                    sx={{ flexGrow: 1 }}
                   >
-                    {item.name}
-                  </NavButton>
-                ))}
-                <BookNowButton 
-                  component={RouterLink}
-                  to="/booking"
+                    Luxury Spa
+                  </Logo>
+                </Box>
+                <IconButton
+                  size="large"
+                  aria-label="menu"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMobileMenuToggle}
+                  color="inherit"
                 >
-                  Book Now
-                </BookNowButton>
+                  <MenuIcon />
+                </IconButton>
+              </>
+            ) : (
+              // Desktop menu
+              <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
+                {pages.map((page) => (
+                  <Button
+                    key={page.title}
+                    component={RouterLink}
+                    to={page.path}
+                    sx={{ my: 2, color: 'inherit', display: 'block', mx: 1 }}
+                  >
+                    {page.title}
+                  </Button>
+                ))}
               </Box>
             )}
           </Toolbar>
         </Container>
       </StyledAppBar>
-      {isMobile && mobileDrawer}
-      
-      <Box component="main" sx={{ flexGrow: 1, pt: 8, pb: 4 }}>
+      {isMobile && mobileMenuOpen && mobileDrawer}
+
+      <Box component="main" sx={{ flexGrow: 1, pt: 10, pb: 4 }}>
         <Outlet />
       </Box>
     </Box>
