@@ -153,3 +153,7 @@ const AppLayout: React.FC<AppLayoutProps> = () => {
 };
 
 export default AppLayout;
+import Footer from '../components/Footer';
+
+// Add this right before the closing </Box> tag in the return statement
+<Footer />

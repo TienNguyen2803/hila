@@ -117,3 +117,128 @@ const FeaturedServices = () => {
 };
 
 export default FeaturedServices;
+import React from 'react';
+import { Box, Typography, Container, Grid, Card, CardMedia, CardContent, Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { Service } from '../../types';
+import { useNavigate } from 'react-router-dom';
+
+// Demo data - would come from your CMS in a real application
+const services: Service[] = [
+  {
+    id: '1',
+    title: 'Swedish Massage',
+    description: 'Our classic full-body massage promotes relaxation, eases muscle tension, and improves circulation.',
+    imageUrl: '/images/service-massage.jpg',
+    price: 120
+  },
+  {
+    id: '2',
+    title: 'Facial Treatment',
+    description: 'Revitalize your skin with our premium facial treatment using organic products.',
+    imageUrl: '/images/service-facial.jpg',
+    price: 95
+  },
+  {
+    id: '3',
+    title: 'Body Scrub',
+    description: 'Exfoliate your skin and remove dead cells with our refreshing body scrub treatment.',
+    imageUrl: '/images/service-scrub.jpg',
+    price: 85
+  },
+  {
+    id: '4',
+    title: 'Aromatherapy',
+    description: 'Experience the healing power of essential oils with our aromatherapy treatment.',
+    imageUrl: '/images/service-aromatherapy.jpg',
+    price: 110
+  }
+];
+
+const SectionContainer = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(8, 0),
+  backgroundColor: theme.palette.background.default,
+}));
+
+const ServiceCard = styled(Card)(({ theme }) => ({
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+  '&:hover': {
+    transform: 'translateY(-5px)',
+    boxShadow: theme.shadows[10],
+  }
+}));
+
+const ServiceCardMedia = styled(CardMedia)(({ theme }) => ({
+  height: 200,
+  backgroundSize: 'cover',
+}));
+
+const ServiceCardContent = styled(CardContent)(({ theme }) => ({
+  flexGrow: 1,
+}));
+
+const FeaturedServices = () => {
+  const navigate = useNavigate();
+
+  const handleServiceClick = (id: string) => {
+    navigate(`/services/${id}`);
+  };
+
+  return (
+    <SectionContainer>
+      <Container>
+        <Typography 
+          variant="h4" 
+          component="h2" 
+          gutterBottom
+          sx={{ 
+            textAlign: 'center',
+            fontWeight: 'bold',
+            mb: 6
+          }}
+        >
+          Our Featured Services
+        </Typography>
+        
+        <Grid container spacing={4}>
+          {services.map((service) => (
+            <Grid item xs={12} sm={6} md={3} key={service.id}>
+              <ServiceCard>
+                <ServiceCardMedia
+                  image={service.imageUrl}
+                  title={service.title}
+                />
+                <ServiceCardContent>
+                  <Typography gutterBottom variant="h5" component="h3">
+                    {service.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" paragraph>
+                    {service.description}
+                  </Typography>
+                  {service.price && (
+                    <Typography variant="h6" color="primary" sx={{ mb: 2 }}>
+                      ${service.price}
+                    </Typography>
+                  )}
+                  <Button 
+                    variant="outlined" 
+                    color="primary"
+                    onClick={() => handleServiceClick(service.id)}
+                    fullWidth
+                  >
+                    Learn More
+                  </Button>
+                </ServiceCardContent>
+              </ServiceCard>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </SectionContainer>
+  );
+};
+
+export default FeaturedServices;

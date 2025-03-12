@@ -213,3 +213,202 @@ const ConsultationFormComponent = () => {
 };
 
 export default ConsultationFormComponent;
+import React, { useState } from 'react';
+import { Box, Typography, Container, TextField, Button, Paper, FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { ConsultationForm as ConsultationFormType } from '../../types';
+
+const FormSection = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(8, 0),
+  backgroundColor: theme.palette.grey[50],
+}));
+
+const FormPaper = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(4),
+  maxWidth: 600,
+  margin: '0 auto',
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(6),
+  },
+}));
+
+const ConsultationForm = () => {
+  const [formData, setFormData] = useState<ConsultationFormType>({
+    name: '',
+    phone: '',
+    serviceInterested: ''
+  });
+
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const services = [
+    'Massage Therapy',
+    'Facial Treatment',
+    'Body Scrub',
+    'Aromatherapy',
+    'Manicure & Pedicure',
+    'Hair Treatment',
+    'Other'
+  ];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+    
+    // Clear error when user types
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: ''
+      });
+    }
+  };
+
+  const handleSelectChange = (e: SelectChangeEvent<string>) => {
+    setFormData({
+      ...formData,
+      serviceInterested: e.target.value
+    });
+    
+    // Clear error when user selects
+    if (errors.serviceInterested) {
+      setErrors({
+        ...errors,
+        serviceInterested: ''
+      });
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: Record<string, string> = {};
+    
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+    
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ''))) {
+      newErrors.phone = 'Please enter a valid 10-digit phone number';
+    }
+    
+    if (!formData.serviceInterested) {
+      newErrors.serviceInterested = 'Please select a service';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (validateForm()) {
+      // Here you would send the data to your backend
+      console.log('Form submitted:', formData);
+      
+      // Reset form after successful submission
+      setFormData({
+        name: '',
+        phone: '',
+        serviceInterested: ''
+      });
+      
+      // Show success message (you could use a snackbar or other notification)
+      alert('Thank you for your interest! We will contact you shortly.');
+    }
+  };
+
+  return (
+    <FormSection>
+      <Container>
+        <Typography 
+          variant="h4" 
+          component="h2" 
+          gutterBottom
+          sx={{ 
+            textAlign: 'center',
+            fontWeight: 'bold',
+            mb: 5
+          }}
+        >
+          Get a Free Consultation
+        </Typography>
+        
+        <FormPaper>
+          <form onSubmit={handleSubmit}>
+            <Box sx={{ mb: 3 }}>
+              <TextField
+                fullWidth
+                label="Your Name"
+                name="name"
+                variant="outlined"
+                value={formData.name}
+                onChange={handleChange}
+                error={!!errors.name}
+                helperText={errors.name}
+                required
+              />
+            </Box>
+            
+            <Box sx={{ mb: 3 }}>
+              <TextField
+                fullWidth
+                label="Phone Number"
+                name="phone"
+                variant="outlined"
+                value={formData.phone}
+                onChange={handleChange}
+                error={!!errors.phone}
+                helperText={errors.phone}
+                required
+                placeholder="e.g., 1234567890"
+              />
+            </Box>
+            
+            <Box sx={{ mb: 4 }}>
+              <FormControl fullWidth error={!!errors.serviceInterested}>
+                <InputLabel id="service-interested-label">Service Interested In</InputLabel>
+                <Select
+                  labelId="service-interested-label"
+                  id="serviceInterested"
+                  value={formData.serviceInterested}
+                  label="Service Interested In"
+                  onChange={handleSelectChange}
+                  required
+                >
+                  {services.map((service) => (
+                    <MenuItem key={service} value={service}>
+                      {service}
+                    </MenuItem>
+                  ))}
+                </Select>
+                {errors.serviceInterested && (
+                  <Typography variant="caption" color="error">
+                    {errors.serviceInterested}
+                  </Typography>
+                )}
+              </FormControl>
+            </Box>
+            
+            <Button 
+              type="submit" 
+              variant="contained" 
+              color="primary" 
+              size="large" 
+              fullWidth
+              sx={{ py: 1.5 }}
+            >
+              Request Consultation
+            </Button>
+          </form>
+        </FormPaper>
+      </Container>
+    </FormSection>
+  );
+};
+
+export default ConsultationForm;

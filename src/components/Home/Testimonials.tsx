@@ -177,3 +177,163 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
+import React, { useState, useEffect } from 'react';
+import { Box, Typography, Container, Paper, Avatar, Rating } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+import { Testimonial } from '../../types';
+
+// Demo data - would come from your CMS in a real application
+const testimonials: Testimonial[] = [
+  {
+    id: '1',
+    name: 'Sarah Johnson',
+    comment: 'The massage therapy at this spa is absolutely wonderful. I felt completely renewed after my treatment. The staff is professional and attentive.',
+    rating: 5,
+    avatar: '/images/avatar-1.jpg'
+  },
+  {
+    id: '2',
+    name: 'Michael Chen',
+    comment: 'I\'ve tried many spas in the area, but this one stands out for its exceptional service and calming atmosphere. Will definitely be back!',
+    rating: 4,
+    avatar: '/images/avatar-2.jpg'
+  },
+  {
+    id: '3',
+    name: 'Emma Rodriguez',
+    comment: 'The facial treatment was amazing. My skin feels refreshed and I\'ve received many compliments. The esthetician was knowledgeable and friendly.',
+    rating: 5,
+    avatar: '/images/avatar-3.jpg'
+  },
+  {
+    id: '4',
+    name: 'David Thompson',
+    comment: 'Great experience from start to finish. The aromatherapy session was exactly what I needed after a stressful week. Highly recommended!',
+    rating: 5,
+    avatar: '/images/avatar-4.jpg'
+  }
+];
+
+const SectionContainer = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(8, 0),
+  backgroundColor: theme.palette.background.paper,
+}));
+
+const TestimonialPaper = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(4),
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  position: 'relative',
+  margin: '0 15px',
+  opacity: 0,
+  transition: 'opacity 0.5s ease-in-out',
+}));
+
+const QuoteIcon = styled(FormatQuoteIcon)(({ theme }) => ({
+  fontSize: '2rem',
+  color: theme.palette.grey[300],
+  position: 'absolute',
+  top: theme.spacing(2),
+  left: theme.spacing(2),
+}));
+
+const Testimonials = () => {
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <SectionContainer>
+      <Container>
+        <Typography 
+          variant="h4" 
+          component="h2" 
+          gutterBottom
+          sx={{ 
+            textAlign: 'center',
+            fontWeight: 'bold',
+            mb: 6
+          }}
+        >
+          What Our Clients Say
+        </Typography>
+        
+        <Box sx={{ position: 'relative', height: '300px' }}>
+          {testimonials.map((testimonial, index) => (
+            <TestimonialPaper 
+              key={testimonial.id} 
+              elevation={3}
+              sx={{ 
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                opacity: index === currentTestimonial ? 1 : 0,
+                zIndex: index === currentTestimonial ? 1 : 0,
+              }}
+            >
+              <QuoteIcon />
+              <Typography 
+                variant="body1" 
+                paragraph
+                sx={{ 
+                  fontStyle: 'italic',
+                  mb: 4,
+                  pt: 2
+                }}
+              >
+                "{testimonial.comment}"
+              </Typography>
+              
+              <Box sx={{ mt: 'auto', display: 'flex', alignItems: 'center' }}>
+                <Avatar 
+                  src={testimonial.avatar} 
+                  alt={testimonial.name}
+                  sx={{ width: 60, height: 60, mr: 2 }}
+                />
+                <Box>
+                  <Typography variant="h6">
+                    {testimonial.name}
+                  </Typography>
+                  <Rating 
+                    value={testimonial.rating} 
+                    readOnly 
+                    size="small"
+                  />
+                </Box>
+              </Box>
+            </TestimonialPaper>
+          ))}
+        </Box>
+        
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+          {testimonials.map((_, index) => (
+            <Box
+              key={index}
+              onClick={() => setCurrentTestimonial(index)}
+              sx={{
+                width: 12,
+                height: 12,
+                borderRadius: '50%',
+                backgroundColor: index === currentTestimonial ? 'primary.main' : 'grey.300',
+                mx: 0.5,
+                cursor: 'pointer',
+                transition: 'background-color 0.3s ease'
+              }}
+            />
+          ))}
+        </Box>
+      </Container>
+    </SectionContainer>
+  );
+};
+
+export default Testimonials;

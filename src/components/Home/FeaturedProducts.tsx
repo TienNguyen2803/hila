@@ -166,3 +166,169 @@ const FeaturedProducts = () => {
 };
 
 export default FeaturedProducts;
+import React from 'react';
+import { Box, Typography, Container, Grid, Card, CardMedia, CardContent, Button, Chip } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { Product } from '../../types';
+import { useNavigate } from 'react-router-dom';
+
+// Demo data - would come from your CMS in a real application
+const products: Product[] = [
+  {
+    id: '1',
+    name: 'Luxury Face Cream',
+    description: 'Hydrating and rejuvenating face cream with natural ingredients.',
+    imageUrl: '/images/product-face-cream.jpg',
+    price: 65,
+    discountPrice: 55
+  },
+  {
+    id: '2',
+    name: 'Essential Oil Collection',
+    description: 'Set of 6 premium essential oils for aromatherapy.',
+    imageUrl: '/images/product-oils.jpg',
+    price: 89
+  },
+  {
+    id: '3',
+    name: 'Body Lotion',
+    description: 'Nourishing body lotion that leaves skin soft and moisturized.',
+    imageUrl: '/images/product-lotion.jpg',
+    price: 45
+  },
+  {
+    id: '4',
+    name: 'Bath Salts',
+    description: 'Relaxing bath salts with lavender and eucalyptus.',
+    imageUrl: '/images/product-bath-salts.jpg',
+    price: 35,
+    discountPrice: 28
+  }
+];
+
+const SectionContainer = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(8, 0),
+  backgroundColor: theme.palette.grey[50],
+}));
+
+const ProductCard = styled(Card)(({ theme }) => ({
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  position: 'relative',
+  transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+  '&:hover': {
+    transform: 'translateY(-5px)',
+    boxShadow: theme.shadows[10],
+  }
+}));
+
+const ProductCardMedia = styled(CardMedia)(({ theme }) => ({
+  height: 200,
+  backgroundSize: 'cover',
+}));
+
+const ProductCardContent = styled(CardContent)(({ theme }) => ({
+  flexGrow: 1,
+}));
+
+const DiscountChip = styled(Chip)(({ theme }) => ({
+  position: 'absolute',
+  top: 12,
+  right: 12,
+  backgroundColor: theme.palette.error.main,
+  color: theme.palette.error.contrastText,
+  fontWeight: 'bold',
+}));
+
+const FeaturedProducts = () => {
+  const navigate = useNavigate();
+
+  const handleProductClick = (id: string) => {
+    navigate(`/products/${id}`);
+  };
+
+  const calculateDiscount = (original: number, discounted: number) => {
+    return Math.round(((original - discounted) / original) * 100);
+  };
+
+  return (
+    <SectionContainer>
+      <Container>
+        <Typography 
+          variant="h4" 
+          component="h2" 
+          gutterBottom
+          sx={{ 
+            textAlign: 'center',
+            fontWeight: 'bold',
+            mb: 6
+          }}
+        >
+          Featured Products
+        </Typography>
+        
+        <Grid container spacing={4}>
+          {products.map((product) => (
+            <Grid item xs={12} sm={6} md={3} key={product.id}>
+              <ProductCard>
+                {product.discountPrice && (
+                  <DiscountChip 
+                    label={`${calculateDiscount(product.price, product.discountPrice)}% OFF`} 
+                    size="small"
+                  />
+                )}
+                <ProductCardMedia
+                  image={product.imageUrl}
+                  title={product.name}
+                />
+                <ProductCardContent>
+                  <Typography gutterBottom variant="h6" component="h3">
+                    {product.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" paragraph>
+                    {product.description}
+                  </Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                    {product.discountPrice ? (
+                      <>
+                        <Typography 
+                          variant="h6" 
+                          color="primary" 
+                          sx={{ fontWeight: 'bold', mr: 1 }}
+                        >
+                          ${product.discountPrice}
+                        </Typography>
+                        <Typography 
+                          variant="body1" 
+                          color="text.secondary" 
+                          sx={{ textDecoration: 'line-through' }}
+                        >
+                          ${product.price}
+                        </Typography>
+                      </>
+                    ) : (
+                      <Typography variant="h6" color="primary" sx={{ fontWeight: 'bold' }}>
+                        ${product.price}
+                      </Typography>
+                    )}
+                  </Box>
+                  <Button 
+                    variant="contained" 
+                    color="primary"
+                    onClick={() => handleProductClick(product.id)}
+                    fullWidth
+                  >
+                    View Details
+                  </Button>
+                </ProductCardContent>
+              </ProductCard>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </SectionContainer>
+  );
+};
+
+export default FeaturedProducts;
