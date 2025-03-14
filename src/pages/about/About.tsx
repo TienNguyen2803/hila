@@ -22,6 +22,8 @@ const StyledButton = styled(Button)`
   gap: 8px;
   background-color: #1a2138;
   color: white;
+  font-size: 1.25rem;
+  font-weight: 500;
   &:hover {
     background-color: #2a314f;
   }
@@ -35,6 +37,8 @@ const StyledIconButton = styled(IconButton)`
   padding: 8px 16px;
   border-radius: 8px;
   color: #1a2138;
+  font-size: 1.25rem;
+  font-weight: 500;
 `;
 
 const GridContainer = styled(Box)`
