@@ -66,11 +66,11 @@ const About = () => {
         <Box sx={{ display: 'flex', gap: 2 }}>
           <StyledIconButton>
             <Save size={16} />
-            Lưu nháp
+            <Typography variant="h5" >Lưu nháp</Typography>
           </StyledIconButton>
           <StyledButton>
             <Send size={16} />
-            Gửi báo giá
+            <Typography variant="h5" >Gửi báo giá</Typography>
           </StyledButton>
         </Box>
       </Header>
@@ -186,11 +186,11 @@ const About = () => {
             <Box sx={{ display: 'flex', gap: 2, mt: 3 }}>
               <StyledIconButton>
                 <Copy size={16} />
-                Sao chép giá
+                <Typography variant="h5" >Sao chép giá</Typography>
               </StyledIconButton>
               <StyledIconButton>
                 <FileText size={16} />
-                Xuất PDF
+                <Typography variant="h5" >Xuất PDF</Typography>
               </StyledIconButton>
             </Box>
           </CardContent>
